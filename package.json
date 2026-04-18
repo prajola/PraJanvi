@@ -1,0 +1,16 @@
+{
+  "name": "prajanvi-website",
+  "version": "1.0.0",
+  "description": "Interactive Portrait Slider Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve@latest .",
+    "dev": "npx -y serve@latest ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "serve": "^14.2.4"
+  }
+}

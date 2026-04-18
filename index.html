@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Best Friend, Priya ✨</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Dancing+Script:wght@500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div id="magic-cursor"></div>
+    <div id="magic-cursor-follower"></div>
+
+    <!-- Floating Hearts Background -->
+    <div id="petals-container"></div>
+
+    <!-- Audio (Only local file supported now) -->
+    <audio id="romantic-audio" loop>
+        <source src="assets/music.mp3?v=3" type="audio/mpeg">
+    </audio>
+
+    <!-- UI Controls -->
+    <div id="ui-controls">
+        <button id="music-toggle" class="glass-btn" title="Play Music">
+            <span class="music-on">🎵</span>
+            <span class="music-off hidden">🔇</span>
+        </button>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="nav-arrow prev hidden" id="prev-btn" aria-label="Previous Page">
+        <span>‹</span>
+    </button>
+    <button class="nav-arrow next" id="next-btn" aria-label="Next Page">
+        <span>›</span>
+    </button>
+
+
+
+    <!-- Page Dots -->
+    <div class="page-dots" id="page-dots">
+        <span class="dot active" data-page="0"></span>
+        <span class="dot" data-page="1"></span>
+        <span class="dot" data-page="2"></span>
+    </div>
+
+    <!-- Horizontal Slider -->
+    <div class="slider-track" id="slider-track" style="width: 300vw;">
+        <section class="page welcome-page" id="page-welcome">
+            <!-- Animated background layers -->
+            <div class="hero-bg-layer"></div>
+            <div class="hero-particles" id="hero-particles"></div>
+            
+            <!-- Floating Flower Decorations -->
+            <div class="floating-flowers">
+                <span class="float-flower f1">🌹</span>
+                <span class="float-flower f2">🌻</span>
+                <span class="float-flower f3">🌹</span>
+                <span class="float-flower f4">🌻</span>
+                <span class="float-flower f5">🌸</span>
+                <span class="float-flower f6">🌹</span>
+                <span class="float-flower f7">🌻</span>
+                <span class="float-flower f8">🌸</span>
+                <span class="float-flower f9">🌹</span>
+                <span class="float-flower f10">🌻</span>
+            </div>
+            
+            <div class="page-inner hero-layout">
+                <!-- Left: Content -->
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-heart">✨</span>
+                        <span class="badge-text">For My Best Friend</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        <span class="title-line" style="--delay: 0.1s">The one who</span>
+                        <span class="title-line" style="--delay: 0.3s">makes my life</span>
+                        <span class="title-line title-accent" style="--delay: 0.5s">beautiful</span>
+                    </h1>
+
+                    <div class="hero-divider">
+                        <span class="divider-line"></span>
+                        <span class="divider-heart">🌟</span>
+                        <span class="divider-line"></span>
+                    </div>
+
+                    <p class="hero-message">
+                        Priya, nee friendship naaku life lo dorikina most precious gift.
+                        Nuvvu naa life lo unnanduku nenu chala blessed ga feel avutanu.
+                        <strong>Your presence makes everything better.</strong>
+                    </p>
+
+                    <button class="hero-btn" id="open-letter-btn">
+                        <span class="btn-glow"></span>
+                        <span class="btn-content">
+                            <span class="btn-icon">💌</span>
+                            <span>Open My Letter</span>
+                        </span>
+                    </button>
+
+                    <div class="hero-signature">
+                        — your friend, always and forever ✨
+                    </div>
+                </div>
+
+                <!-- Right: Portrait -->
+                <div class="hero-portrait-area" id="welcome-right">
+                    <div class="orbiting-hearts" id="orbiting-hearts">
+                        <span class="orbit-heart" style="--orbit-delay: 0s; --orbit-size: 1.4rem">🌹</span>
+                        <span class="orbit-heart" style="--orbit-delay: 2s; --orbit-size: 1.2rem">🌻</span>
+                        <span class="orbit-heart" style="--orbit-delay: 4s; --orbit-size: 1rem">🌸</span>
+                        <span class="orbit-heart" style="--orbit-delay: 6s; --orbit-size: 1.1rem">🌹</span>
+                    </div>
+                    <div class="portrait-container" id="portrait-handle">
+                        <div class="portrait-ring"></div>
+                        <img src="assets/priya.png" alt="My Best Friend Priya" class="portrait-image">
+                        <div class="portrait-glow"></div>
+                        <div class="portrait-label">My Precious Priya ✨</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: Letter -->
+        <section class="page letter-page" id="page-letter">
+            <div class="letter-reveal-container">
+                <!-- 3D Envelope -->
+                <div class="envelope-wrapper" id="envelope-wrapper">
+                    <div class="envelope" id="envelope">
+                        <div class="envelope-back"></div>
+                        <div class="envelope-flap" id="envelope-flap">
+                            <div class="heart-seal">❤️</div>
+                        </div>
+                        <div class="envelope-body"></div>
+                        <div class="envelope-paper-preview">✨</div>
+                    </div>
+                </div>
+
+                <!-- The Actual Letter (Hidden initially) -->
+                <div class="page-inner letter-inner hidden" id="letter-content">
+                    <div class="letter-decor-left">🌻</div>
+                    <div class="letter-decor-right">🌸</div>
+
+                    <div class="letter-card glass-parchment">
+                        <div class="letter-card-header">
+                            <span class="letter-emoji">💛</span>
+                            <h2 class="handwriting-font">A Letter to My Best Friend</h2>
+                            <div class="gold-divider"></div>
+                        </div>
+                        
+                        <div class="parchment-content" id="typewriter-text">
+                            <!-- Text will be typed here via JS -->
+                        </div>
+
+                        <!-- Polaroid Gallery -->
+                        <div class="memory-snapshots">
+                            <div class="snapshot-frame angle-left">
+                                <img src="assets/Priya Memory 1.png" alt="Memory 1">
+                                <div class="snapshot-caption">Together ✨</div>
+                            </div>
+                            <div class="snapshot-frame angle-right">
+                                <img src="assets/Priya Memory 2.png" alt="Memory 2" style="object-position: center 20%;">
+                                <div class="snapshot-caption">Always 🌻</div>
+                            </div>
+                            <div class="snapshot-frame angle-straight">
+                                <img src="assets/Priya Memory 3.png" alt="Memory 3" style="object-position: center 10%;">
+                                <div class="snapshot-caption">Forever 🩷</div>
+                            </div>
+                        </div>
+
+                        <div class="blessing-card">
+                            <p class="blessing-text cursive">
+                                I value your presence in my life more than words can ever say.
+                            </p>
+                            <p class="blessing-sub">
+                                You make every ordinary day feel extraordinary. ✨
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- PAGE 3: The Journey Together -->
+        <section class="page journey-page" id="page-journey">
+            <div class="page-inner journey-inner">
+                <div class="connection-blend-root">
+                    <div class="connection-glow"></div>
+                    <div class="connection-container">
+                        <div class="blend-side p1">
+                            <img src="assets/Prajol Memory 1.png" alt="Prajol">
+                        </div>
+                        <div class="blend-center-decor">👫</div>
+                        <div class="blend-side p2">
+                            <img src="assets/Priya Memory 1.png" alt="Priya">
+                        </div>
+                    </div>
+                </div>
+                <div class="journey-footer">
+                    <h2 class="journey-title handwriting-font">Years of Authenticity ✨</h2>
+                    <p class="journey-subtitle">Always together, forever us. ✨</p>
+                    <p class="memory-caption" style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">No edits, no 3D effects — just us, exactly as we are. A friendship that needs no filters. Best friends, forever. 🩷✨</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="script.js?v=2"></script>
+</body>
+</html>
