@@ -227,15 +227,37 @@ function initAudio() {
 
     if (!audio || !toggle) return;
 
-    // Handle source errors (e.g. if music.mp3 is missing, try next source)
+    let hasStarted = false;
+
+    // Handle source errors
     audio.addEventListener('error', (e) => {
-        console.warn("Primary audio source failed, trying fallback...");
+        console.warn("Audio source failed:", e);
     });
 
-    toggle.addEventListener('click', () => {
+    // Auto-play on first user interaction (mobile browsers require gesture)
+    function unlockAudio() {
+        if (hasStarted) return;
+        hasStarted = true;
+        audio.play().then(() => {
+            onIcon.classList.remove('hidden');
+            offIcon.classList.add('hidden');
+        }).catch(err => {
+            console.warn("Auto-play blocked:", err);
+            hasStarted = false; // Allow retry
+        });
+        // Clean up the one-time listeners
+        document.removeEventListener('touchstart', unlockAudio);
+        document.removeEventListener('click', unlockAudio);
+    }
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+    document.addEventListener('click', unlockAudio, { once: true });
+
+    // Manual toggle button
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation(); // Don't trigger the unlock listener
         if (audio.paused) {
             audio.play().catch(err => {
-                console.error("Playback failed. Most browsers require a user click first.", err);
+                console.error("Playback failed:", err);
             });
             onIcon.classList.remove('hidden');
             offIcon.classList.add('hidden');
