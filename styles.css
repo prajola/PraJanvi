@@ -759,7 +759,6 @@ button, a, .dot, .portrait-container, .glass-btn {
     position: fixed;
     inset: 0;
     background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.4) 100%);
-    backdrop-filter: blur(0px);
     opacity: 0;
     pointer-events: none;
     z-index: 5;
