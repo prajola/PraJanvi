@@ -20,46 +20,66 @@
 }
 
 /* ============================================
-   MAGIC CURSOR
+   MAGIC CURSOR — Romantic Heart
    ============================================ */
 #magic-cursor {
     position: fixed;
-    width: 8px;
-    height: 8px;
-    background: var(--accent-pink);
-    border-radius: 50%;
+    width: 18px;
+    height: 18px;
     pointer-events: none;
     z-index: 10000;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, background 0.3s;
-    box-shadow: 0 0 10px var(--rose-glow);
+    transform: translate(-50%, -60%);
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.15s ease, font-size 0.3s ease;
+    filter: drop-shadow(0 0 6px rgba(236, 72, 153, 0.8));
+    user-select: none;
+}
+
+#magic-cursor::after {
+    content: '🩷';
+    display: block;
+}
+
+#magic-cursor.hovered {
+    font-size: 26px;
+    transform: translate(-50%, -60%) scale(1.3);
+    filter: drop-shadow(0 0 14px rgba(236, 72, 153, 1));
 }
 
 #magic-cursor-follower {
     position: fixed;
-    width: 35px;
-    height: 35px;
-    background: rgba(236, 72, 153, 0.06);
-    border: 1px solid rgba(236, 72, 153, 0.15);
+    width: 42px;
+    height: 42px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%);
+    border: 1.5px solid rgba(236, 72, 153, 0.25);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
-    transition: width 0.4s, height 0.4s, background 0.4s, border 0.4s;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s ease,
+                background 0.4s ease;
+    animation: followerPulse 3s ease-in-out infinite;
 }
 
-#magic-cursor.hovered {
-    width: 14px;
-    height: 14px;
-    background: var(--accent-deep);
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+@keyframes followerPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.1); }
+    50%       { box-shadow: 0 0 0 8px rgba(236, 72, 153, 0); }
 }
 
 #magic-cursor-follower.hovered {
-    width: 55px;
-    height: 55px;
-    background: rgba(236, 72, 153, 0.08);
-    border: 1px solid rgba(236, 72, 153, 0.4);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 70%);
+    border-color: rgba(236, 72, 153, 0.5);
+    animation: followerHoverPulse 0.8s ease-in-out infinite;
+}
+
+@keyframes followerHoverPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.2); }
+    50%       { box-shadow: 0 0 0 12px rgba(236, 72, 153, 0); }
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -112,50 +132,70 @@ button, a, .dot, .portrait-container, .glass-btn {
     box-shadow: 0 0 25px var(--rose-glow);
 }
 
-/* Navigation Arrows — "Eternal Flow" */
+/* Navigation Arrows — "Rose Bloom" */
 .nav-arrow {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    width: 60px;
-    height: 60px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(212, 163, 80, 0.3); /* Gold border hint */
-    color: var(--gold);
-    font-size: 2.5rem;
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(236, 72, 153, 0.25);
+    color: var(--accent-pink);
+    font-size: 1.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 1001;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 20px rgba(236, 72, 153, 0.12),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+    animation: arrowBreath 3s ease-in-out infinite;
 }
 
-.nav-arrow.prev { left: 30px; }
-.nav-arrow.next { right: 30px; }
+@keyframes arrowBreath {
+    0%, 100% { box-shadow: 0 4px 20px rgba(236, 72, 153, 0.12), inset 0 1px 0 rgba(255,255,255,0.6); }
+    50%       { box-shadow: 0 4px 30px rgba(236, 72, 153, 0.28), inset 0 1px 0 rgba(255,255,255,0.6); }
+}
+
+.nav-arrow.prev { left: 28px; }
+.nav-arrow.next { right: 28px; }
 
 .nav-arrow span {
     line-height: 1;
-    margin-top: -5px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
 }
 
+.nav-arrow.prev span { content: '‹'; }
+.nav-arrow.next span { content: '›'; }
+
 .nav-arrow:hover {
-    background: rgba(255, 255, 255, 0.8);
-    transform: translateY(-50%) scale(1.15);
-    border-color: var(--gold);
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-50%) scale(1.18);
+    border-color: rgba(236, 72, 153, 0.5);
     color: var(--accent-deep);
-    box-shadow: 0 0 30px rgba(212, 163, 80, 0.4);
+    box-shadow: 0 8px 40px rgba(236, 72, 153, 0.35),
+                0 0 0 4px rgba(236, 72, 153, 0.08),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.nav-arrow:hover span {
+    transform: scale(1.2);
 }
 
 .nav-arrow:active {
-    transform: translateY(-50%) scale(0.95);
+    transform: translateY(-50%) scale(0.93);
+    box-shadow: 0 2px 10px rgba(236, 72, 153, 0.2);
 }
 
 .nav-arrow.hidden {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(-50%) scale(0.8);
+    transform: translateY(-50%) scale(0.75);
 }
 
 /* ============================================
@@ -184,35 +224,58 @@ button, a, .dot, .portrait-container, .glass-btn {
 }
 
 /* ============================================
-   PAGE DOTS
+   PAGE DOTS — Romantic Indicators
    ============================================ */
 .page-dots {
     position: fixed;
-    right: 30px;
+    right: 28px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 100;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 14px;
+    align-items: center;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: rgba(236, 72, 153, 0.2);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(236, 72, 153, 0.18);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    border: 1px solid rgba(236, 72, 153, 0.1);
+    border: 1.5px solid rgba(236, 72, 153, 0.2);
+    position: relative;
+}
+
+.dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 1px solid rgba(236, 72, 153, 0);
+    transition: all 0.4s ease;
+}
+
+.dot:hover::after {
+    border-color: rgba(236, 72, 153, 0.3);
+    inset: -6px;
 }
 
 .dot.active {
     background: var(--accent-pink);
-    width: 30px;
-    border-radius: 5px;
-    box-shadow: 0 0 15px var(--rose-glow);
+    width: 10px;
+    height: 10px;
     border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15),
+                0 0 15px rgba(236, 72, 153, 0.4);
+    animation: dotHeartbeat 1.4s ease-in-out infinite;
+}
+
+@keyframes dotHeartbeat {
+    0%, 100% { transform: scale(1);   box-shadow: 0 0 0 3px rgba(236,72,153,0.15), 0 0 15px rgba(236,72,153,0.4); }
+    50%       { transform: scale(1.25); box-shadow: 0 0 0 5px rgba(236,72,153,0.08), 0 0 22px rgba(236,72,153,0.55); }
 }
 
 /* ============================================

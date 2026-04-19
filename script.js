@@ -303,6 +303,13 @@ function initMagicCursor() {
     
     if (!cursor || !follower) return;
 
+    // On mobile, hide custom cursor entirely
+    if ('ontouchstart' in window) {
+        cursor.style.display = 'none';
+        follower.style.display = 'none';
+        return;
+    }
+
     let mouseX = 0, mouseY = 0;
     let followerX = 0, followerY = 0;
     let trailCounter = 0;
@@ -312,27 +319,28 @@ function initMagicCursor() {
         mouseY = e.clientY;
         
         cursor.style.left = mouseX + 'px';
-        cursor.style.top = mouseY + 'px';
+        cursor.style.top  = mouseY + 'px';
 
-        // Spawn tiny heart trail every few moves
+        // Spawn romantic trail every few moves
         trailCounter++;
-        if (trailCounter % 4 === 0) {
+        if (trailCounter % 5 === 0) {
             spawnHeartTrail(mouseX, mouseY);
         }
     });
 
+    // Silky smooth follower ring
     function render() {
-        followerX += (mouseX - followerX) * 0.12;
-        followerY += (mouseY - followerY) * 0.12;
+        followerX += (mouseX - followerX) * 0.09;
+        followerY += (mouseY - followerY) * 0.09;
         
         follower.style.left = followerX + 'px';
-        follower.style.top = followerY + 'px';
+        follower.style.top  = followerY + 'px';
         
         requestAnimationFrame(render);
     }
     render();
 
-    // Hover effect
+    // Hover bloom effect
     const interactives = document.querySelectorAll('button, .dot, .portrait-container, .nav-arrow, .glass-btn');
     interactives.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -346,30 +354,38 @@ function initMagicCursor() {
     });
 }
 
-// Tiny hearts that float up from cursor
+// Romantic cursor trail — petals & sparkles
 function spawnHeartTrail(x, y) {
+    const symbols = ['🌸', '🌹', '💕', '✨', '🌺', '🩷', '⭐', '🌸'];
     const el = document.createElement('span');
-    el.innerText = '✨';
-    el.style.position = 'fixed';
-    el.style.left = x + 'px';
-    el.style.top = y + 'px';
-    el.style.fontSize = (Math.random() * 8 + 6) + 'px';
-    el.style.color = `hsl(${40 + Math.random() * 20}, 80%, ${55 + Math.random() * 20}%)`;
-    el.style.pointerEvents = 'none';
-    el.style.zIndex = '9998';
-    el.style.transform = 'translate(-50%, -50%)';
+    el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.cssText = `
+        position: fixed;
+        left: ${x}px;
+        top: ${y}px;
+        font-size: ${Math.random() * 9 + 7}px;
+        pointer-events: none;
+        z-index: 9997;
+        transform: translate(-50%, -50%);
+        user-select: none;
+        filter: drop-shadow(0 0 3px rgba(236,72,153,0.4));
+    `;
 
     document.body.appendChild(el);
 
+    const driftX = (Math.random() - 0.5) * 40;
+    const driftY = -(Math.random() * 35 + 15);
+    const rotate = (Math.random() - 0.5) * 60;
+
     el.animate([
-        { transform: 'translate(-50%, -50%) scale(1)', opacity: 0.8 },
-        { transform: `translate(${(Math.random() - 0.5) * 30}px, ${-20 - Math.random() * 30}px) scale(0)`, opacity: 0 }
+        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)',   opacity: 0.9 },
+        { transform: `translate(calc(-50% + ${driftX}px), calc(-50% + ${driftY}px)) scale(0) rotate(${rotate}deg)`, opacity: 0 }
     ], {
-        duration: 600 + Math.random() * 400,
-        easing: 'ease-out'
+        duration: 700 + Math.random() * 500,
+        easing: 'cubic-bezier(0, 0, 0.3, 1)'
     });
 
-    setTimeout(() => el.remove(), 1000);
+    setTimeout(() => el.remove(), 1300);
 }
 
 // ============================================
