@@ -8,9 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentPage  = 0;
     const totalPages = 3;
 
+    // --- Progressive Unlock State ---
+    let isLetterUnlocked  = false;
+    let isJourneyUnlocked = false;
+
+    function isPageLocked(n) {
+        if (n === 1) return !isLetterUnlocked;
+        if (n === 2) return !isJourneyUnlocked;
+        return false;
+    }
+
     // --- Slide to page ---
-    function goToPage(n) {
+    function goToPage(n, bypassLock = false) {
         if (n < 0 || n >= totalPages) return;
+        
+        // Block if page is locked (unless bypassed by direct button click)
+        if (!bypassLock && isPageLocked(n)) return;
+
         currentPage = n;
         track.style.transform = `translateX(-${n * 100}vw)`;
         updateDots();
@@ -25,7 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateDots() {
         dots.forEach((d, i) => {
             const isActive = i === currentPage;
+            const isLocked = isPageLocked(i);
+            
             d.classList.toggle('active', isActive);
+            d.classList.toggle('locked', isLocked);
+            
             if (isActive) {
                 d.style.transform = 'scale(1.2) translateY(-2px)';
                 setTimeout(() => d.style.transform = '', 300);
@@ -39,8 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
             else                  prevBtn.classList.remove('hidden');
         }
         if (nextBtn) {
-            if (currentPage === totalPages - 1) nextBtn.classList.add('hidden');
-            else                               nextBtn.classList.remove('hidden');
+            // Hide next arrow if it's the last page OR if the next page is locked
+            const isLastPage = currentPage === totalPages - 1;
+            const nextLocked = isPageLocked(currentPage + 1);
+            
+            if (isLastPage || nextLocked) nextBtn.classList.add('hidden');
+            else                          nextBtn.classList.remove('hidden');
         }
     }
 
@@ -82,9 +104,12 @@ Your presence gives me courage and strength."`;
     letterBtn.addEventListener('click', () => {
         launchHeartConfetti();
         
+        // Unlock Letter Page
+        isLetterUnlocked = true;
+        
         // Slide to the page first
         setTimeout(() => {
-            goToPage(1);
+            goToPage(1, true); // Bypass lock for this triggered navigation
             
             // Wait for the slide to finish, then open envelope
             setTimeout(() => {
@@ -101,6 +126,11 @@ Your presence gives me courage and strength."`;
                         // Start typing the heart-felt message
                         setTimeout(() => {
                             typeWriter(letterText, typewriterEl);
+                            
+                            // Unlock Journey Page once content is revealed
+                            isJourneyUnlocked = true;
+                            updateArrows();
+                            updateDots();
                         }, 500);
                     }, 500);
                 }, 2000); // Wait for envelope animation

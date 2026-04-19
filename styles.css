@@ -255,6 +255,13 @@ button, a, .dot, .portrait-container, .glass-btn {
     animation: dotHeartbeat 1.4s ease-in-out infinite;
 }
 
+.dot.locked {
+    opacity: 0.15;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: rgba(236, 72, 153, 0.1);
+}
+
 @keyframes dotHeartbeat {
     0%, 100% { transform: scale(1);   box-shadow: 0 0 0 3px rgba(236,72,153,0.15), 0 0 15px rgba(236,72,153,0.4); }
     50%       { transform: scale(1.25); box-shadow: 0 0 0 5px rgba(236,72,153,0.08), 0 0 22px rgba(236,72,153,0.55); }
