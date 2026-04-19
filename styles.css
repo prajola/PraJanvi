@@ -768,7 +768,6 @@ button, a, .dot, .portrait-container, .glass-btn {
 
 .focus-overlay.active {
     opacity: 1;
-    backdrop-filter: blur(4px);
 }
 
 /* 3D Envelope Styles */
