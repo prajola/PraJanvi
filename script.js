@@ -1,21 +1,3 @@
-// ============================================
-// MOBILE GATE — Phones see a redirect screen
-// ============================================
-(function() {
-    // A "phone" is narrower than 768px (iPad starts at 768px, iPhone max is ~430px)
-    const isPhone = window.screen.width < 768 || window.innerWidth < 768;
-    if (isPhone) {
-        const gate = document.getElementById('mobile-gate');
-        if (gate) gate.style.display = 'flex';
-        // Prevent ALL scrolling and interaction on the main site
-        document.body.style.overflow = 'hidden';
-        const slider = document.getElementById('slider-track')?.parentElement;
-        if (slider) slider.style.visibility = 'hidden';
-        // Stop here — don't run any of the site code
-        throw new Error('MOBILE_GATE_ACTIVE');
-    }
-})();
-
 document.addEventListener('DOMContentLoaded', () => {
     const track     = document.getElementById('slider-track');
     const dots      = document.querySelectorAll('.dot');
