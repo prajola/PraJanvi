@@ -298,49 +298,39 @@ function initMagneticButton() {
 // MAGIC RED CURSOR with Heart Trail
 // ============================================
 function initMagicCursor() {
-    const cursor = document.getElementById('magic-cursor');
+    const cursor   = document.getElementById('magic-cursor');
     const follower = document.getElementById('magic-cursor-follower');
     
     if (!cursor || !follower) return;
 
-    // On mobile, hide custom cursor entirely
+    // Hide on touch devices
     if ('ontouchstart' in window) {
-        cursor.style.display = 'none';
+        cursor.style.display   = 'none';
         follower.style.display = 'none';
         return;
     }
 
     let mouseX = 0, mouseY = 0;
     let followerX = 0, followerY = 0;
-    let trailCounter = 0;
 
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        
         cursor.style.left = mouseX + 'px';
         cursor.style.top  = mouseY + 'px';
-
-        // Spawn romantic trail every few moves
-        trailCounter++;
-        if (trailCounter % 5 === 0) {
-            spawnHeartTrail(mouseX, mouseY);
-        }
     });
 
-    // Silky smooth follower ring
+    // Ultra-smooth lagging ring
     function render() {
-        followerX += (mouseX - followerX) * 0.09;
-        followerY += (mouseY - followerY) * 0.09;
-        
+        followerX += (mouseX - followerX) * 0.08;
+        followerY += (mouseY - followerY) * 0.08;
         follower.style.left = followerX + 'px';
         follower.style.top  = followerY + 'px';
-        
         requestAnimationFrame(render);
     }
     render();
 
-    // Hover bloom effect
+    // Grow ring on interactive elements
     const interactives = document.querySelectorAll('button, .dot, .portrait-container, .nav-arrow, .glass-btn');
     interactives.forEach(el => {
         el.addEventListener('mouseenter', () => {
@@ -354,44 +344,8 @@ function initMagicCursor() {
     });
 }
 
-// Pure CSS stardust particle trail — no emojis
-function spawnHeartTrail(x, y) {
-    const el = document.createElement('span');
-    // Pick a hue in the rose-gold spectrum: pink 330° → gold 40°
-    const hue    = Math.random() < 0.6 ? (320 + Math.random() * 30) : (30 + Math.random() * 20);
-    const size   = Math.random() * 5 + 3; // 3–8px
-    const spread = size * 2.5;
-
-    el.style.cssText = `
-        position: fixed;
-        left: ${x}px;
-        top: ${y}px;
-        width: ${size}px;
-        height: ${size}px;
-        border-radius: 50%;
-        background: hsl(${hue}, 90%, 70%);
-        box-shadow: 0 0 ${spread}px ${spread / 2}px hsl(${hue}, 90%, 70%);
-        pointer-events: none;
-        z-index: 9996;
-        transform: translate(-50%, -50%);
-    `;
-
-    document.body.appendChild(el);
-
-    const driftX = (Math.random() - 0.5) * 35;
-    const driftY = -(Math.random() * 30 + 10);
-
-    el.animate([
-        { opacity: 0.9, transform: `translate(-50%, -50%) scale(1)` },
-        { opacity: 0,   transform: `translate(calc(-50% + ${driftX}px), calc(-50% + ${driftY}px)) scale(0.1)` }
-    ], {
-        duration: 550 + Math.random() * 450,
-        easing: 'cubic-bezier(0, 0, 0.3, 1)',
-        fill: 'forwards'
-    });
-
-    setTimeout(() => el.remove(), 1050);
-}
+// No trail — keeping it clean and simple
+function spawnHeartTrail() {}
 
 // ============================================
 // PARALLAX for Portrait
