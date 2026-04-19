@@ -662,7 +662,14 @@ button, a, .dot, .portrait-container, .glass-btn {
         0 0 60px rgba(236, 72, 153, 0.1);
     display: block;
     opacity: 0;
-    animation: portraitEntrance 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards;
+    animation: 
+        portraitEntrance 1.5s cubic-bezier(0.23, 1, 0.32, 1) 0.3s forwards,
+        organicBreathe 8s ease-in-out infinite alternate 1.8s;
+}
+
+@keyframes organicBreathe {
+    0%   { transform: scale(1); filter: brightness(1); }
+    100% { transform: scale(1.03); filter: brightness(1.05); }
 }
 
 @keyframes portraitEntrance {
@@ -745,7 +752,23 @@ button, a, .dot, .portrait-container, .glass-btn {
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow-y: auto;
+    overflow: hidden;
+}
+
+.focus-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.4) 100%);
+    backdrop-filter: blur(0px);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+    transition: all 1.5s ease;
+}
+
+.focus-overlay.active {
+    opacity: 1;
+    backdrop-filter: blur(4px);
 }
 
 /* 3D Envelope Styles */

@@ -83,15 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const letterContent   = document.getElementById('letter-content');
     const typewriterEl    = document.getElementById('typewriter-text');
 
-    const letterText = `Nee lanti friend dorakadam naa adrushtam Priya.
-Nuvvu naa life lo lekapothe, oka important piece missing.
-Nee presence naaku courage istundi, strength istundi.
+    const letterText = `Priya, honestly speaking, nee friendship lekapothe nenu eeroju ila undevadini kadu. 
+Prati chinna vishayam lo, prati badha lo nuvvu naku thodu unnau. 
+Friendship ante just matladukovadam kadu, okariki okaru "safe place" ga undadam ani niku telusu. 
 
-"Having a friend like you is my greatest fortune.
-Without you, an important piece of my life would be missing.
-Your presence gives me courage and strength."`;
+"I don't just feel lucky; I feel like I've found my constant in this changing world. 
+You are my home, my peace, and my greatest fortune. 
+Forever is not enough to thank you for being my best friend."`;
 
-    function typeWriter(text, element, speed = 40) {
+    function typeWriter(text, element, speed = 55) {
         element.innerHTML = '';
         let i = 0;
         function type() {
@@ -146,6 +146,7 @@ Your presence gives me courage and strength."`;
         isEnvelopeOpening = true;
         
         envelope.classList.add('open');
+        document.getElementById('focus-overlay')?.classList.add('active');
         
         // After envelope is open, reveal the letter
         setTimeout(() => {
