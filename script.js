@@ -110,32 +110,36 @@ Your presence gives me courage and strength."`;
         // Slide to the page first
         setTimeout(() => {
             goToPage(1, true); // Bypass lock for this triggered navigation
-            
-            // Wait for the slide to finish, then open envelope
-            setTimeout(() => {
-                envelope.classList.add('open');
-                
-                // After envelope is open, reveal the letter
-                setTimeout(() => {
-                    envelopeWrapper.style.opacity = '0';
-                    setTimeout(() => {
-                        envelopeWrapper.style.display = 'none';
-                        letterContent.classList.remove('hidden');
-                        letterContent.classList.add('visible');
-                        
-                        // Start typing the heart-felt message
-                        setTimeout(() => {
-                            typeWriter(letterText, typewriterEl);
-                            
-                            // Unlock Journey Page once content is revealed
-                            isJourneyUnlocked = true;
-                            updateArrows();
-                            updateDots();
-                        }, 500);
-                    }, 500);
-                }, 2000); // Wait for envelope animation
-            }, 800);
         }, 600);
+    });
+
+    // --- Manual Envelope Opening ---
+    let isEnvelopeOpening = false;
+    envelopeWrapper.addEventListener('click', () => {
+        if (isEnvelopeOpening) return;
+        isEnvelopeOpening = true;
+        
+        envelope.classList.add('open');
+        
+        // After envelope is open, reveal the letter
+        setTimeout(() => {
+            envelopeWrapper.style.opacity = '0';
+            setTimeout(() => {
+                envelopeWrapper.style.display = 'none';
+                letterContent.classList.remove('hidden');
+                letterContent.classList.add('visible');
+                
+                // Start typing the heart-felt message
+                setTimeout(() => {
+                    typeWriter(letterText, typewriterEl, 45);
+                    
+                    // Unlock Journey Page once content is revealed
+                    isJourneyUnlocked = true;
+                    updateArrows();
+                    updateDots();
+                }, 500);
+            }, 500);
+        }, 2000); // Wait for envelope animation
     });
 
     // --- Touch / drag ---
