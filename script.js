@@ -354,38 +354,43 @@ function initMagicCursor() {
     });
 }
 
-// Romantic cursor trail — petals & sparkles
+// Pure CSS stardust particle trail — no emojis
 function spawnHeartTrail(x, y) {
-    const symbols = ['🌸', '🌹', '💕', '✨', '🌺', '🩷', '⭐', '🌸'];
     const el = document.createElement('span');
-    el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+    // Pick a hue in the rose-gold spectrum: pink 330° → gold 40°
+    const hue    = Math.random() < 0.6 ? (320 + Math.random() * 30) : (30 + Math.random() * 20);
+    const size   = Math.random() * 5 + 3; // 3–8px
+    const spread = size * 2.5;
+
     el.style.cssText = `
         position: fixed;
         left: ${x}px;
         top: ${y}px;
-        font-size: ${Math.random() * 9 + 7}px;
+        width: ${size}px;
+        height: ${size}px;
+        border-radius: 50%;
+        background: hsl(${hue}, 90%, 70%);
+        box-shadow: 0 0 ${spread}px ${spread / 2}px hsl(${hue}, 90%, 70%);
         pointer-events: none;
-        z-index: 9997;
+        z-index: 9996;
         transform: translate(-50%, -50%);
-        user-select: none;
-        filter: drop-shadow(0 0 3px rgba(236,72,153,0.4));
     `;
 
     document.body.appendChild(el);
 
-    const driftX = (Math.random() - 0.5) * 40;
-    const driftY = -(Math.random() * 35 + 15);
-    const rotate = (Math.random() - 0.5) * 60;
+    const driftX = (Math.random() - 0.5) * 35;
+    const driftY = -(Math.random() * 30 + 10);
 
     el.animate([
-        { transform: 'translate(-50%, -50%) scale(1) rotate(0deg)',   opacity: 0.9 },
-        { transform: `translate(calc(-50% + ${driftX}px), calc(-50% + ${driftY}px)) scale(0) rotate(${rotate}deg)`, opacity: 0 }
+        { opacity: 0.9, transform: `translate(-50%, -50%) scale(1)` },
+        { opacity: 0,   transform: `translate(calc(-50% + ${driftX}px), calc(-50% + ${driftY}px)) scale(0.1)` }
     ], {
-        duration: 700 + Math.random() * 500,
-        easing: 'cubic-bezier(0, 0, 0.3, 1)'
+        duration: 550 + Math.random() * 450,
+        easing: 'cubic-bezier(0, 0, 0.3, 1)',
+        fill: 'forwards'
     });
 
-    setTimeout(() => el.remove(), 1300);
+    setTimeout(() => el.remove(), 1050);
 }
 
 // ============================================
