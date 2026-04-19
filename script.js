@@ -23,7 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (n < 0 || n >= totalPages) return;
         
         // Block if page is locked (unless bypassed by direct button click)
-        if (!bypassLock && isPageLocked(n)) return;
+        if (!bypassLock && isPageLocked(n)) {
+            showNavHint(n);
+            return;
+        }
 
         currentPage = n;
         track.style.transform = `translateX(-${n * 100}vw)`;
@@ -112,6 +115,29 @@ Your presence gives me courage and strength."`;
             goToPage(1, true); // Bypass lock for this triggered navigation
         }, 600);
     });
+
+    // --- Hint Message ---
+    function showNavHint(targetPage) {
+        let hintMsg = "Please open the letter first ✨";
+        if (targetPage === 2) hintMsg = "Read the letter message to continue 💌";
+
+        const existingHint = document.querySelector('.nav-hint');
+        if (existingHint) existingHint.remove();
+
+        const hint = document.createElement('div');
+        hint.className = 'nav-hint';
+        hint.innerHTML = `<span class="hint-icon">🔓</span> ${hintMsg}`;
+        document.body.appendChild(hint);
+
+        // Animate in
+        setTimeout(() => hint.classList.add('visible'), 10);
+
+        // Remove after a while
+        setTimeout(() => {
+            hint.classList.remove('visible');
+            setTimeout(() => hint.remove(), 500);
+        }, 2500);
+    }
 
     // --- Manual Envelope Opening ---
     let isEnvelopeOpening = false;
