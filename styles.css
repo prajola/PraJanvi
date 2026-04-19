@@ -20,19 +20,21 @@
 }
 
 /* ============================================
-   MAGIC CURSOR — Simple & Beautiful
+   MAGIC CURSOR — Warm Gold Fortune Star
    ============================================ */
 #magic-cursor {
     position: fixed;
-    width: 8px;
-    height: 8px;
-    background: #ec4899;
+    width: 9px;
+    height: 9px;
+    background: #f59e0b;
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 8px rgba(236, 72, 153, 0.7);
-    transition: transform 0.15s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow:
+        0 0 8px 2px rgba(245, 158, 11, 0.65),
+        0 0 20px 4px rgba(245, 158, 11, 0.2);
+    transition: transform 0.15s ease, opacity 0.2s ease;
 }
 
 #magic-cursor.hovered {
@@ -42,26 +44,25 @@
 
 #magic-cursor-follower {
     position: fixed;
-    width: 38px;
-    height: 38px;
-    border: 1.5px solid rgba(236, 72, 153, 0.5);
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(245, 158, 11, 0.45);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
                 height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.3s ease,
-                opacity 0.3s ease;
-    backdrop-filter: none;
+                border-color 0.3s ease;
 }
 
 #magic-cursor-follower.hovered {
-    width: 52px;
-    height: 52px;
-    border-color: rgba(236, 72, 153, 0.7);
-    background: rgba(236, 72, 153, 0.05);
+    width: 54px;
+    height: 54px;
+    border-color: rgba(245, 158, 11, 0.65);
+    background: rgba(245, 158, 11, 0.04);
 }
+
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
