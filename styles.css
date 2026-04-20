@@ -796,6 +796,37 @@ button, a, .dot, .portrait-container, .glass-btn {
     pointer-events: none;
 }
 
+.envelope-click-hint {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 8px 24px;
+    border-radius: 30px;
+    border: 1px solid rgba(236, 72, 153, 0.2);
+    color: var(--accent-deep);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.1);
+    animation: hintFloat 3s ease-in-out infinite;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes hintFloat {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+.envelope-wrapper.open .envelope-click-hint {
+    opacity: 0;
+}
+
 .envelope {
     position: relative;
     width: 100%;
