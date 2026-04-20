@@ -89,6 +89,10 @@ Manam antha ekkuva calls maatladaka poina, messages chesukoka poina, but it was 
 Eppudu nee paina aa respect, aa value, aa affection thaggadhu. 
 I always feel like you are the closest person from my family. 
 
+"You are so special to me, adhi ela express cheyalo kooda teliyadam ledhu... edho teliyani feel. 
+Mana madhya aa understanding kooda chaala pure gaa vuntundhi. 
+Nee manchi korevallalo top lo nene vuntanu. Because I respect you, and I like you so much."
+
 "Twenty years of friendship and our bond remains as pure as day one. 
 Even in our silence, there is a deep respect and affection that will never fade. 
 You aren't just a friend; you are the soul I call family."`;

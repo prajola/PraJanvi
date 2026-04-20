@@ -1344,7 +1344,7 @@ html, body {
 }
 
 .journey-page.active-view .blend-side img {
-    filter: grayscale(0%) blur(0) contrast(1.1) brightness(1.05); /* Color Burst & Clear! */
+    filter: grayscale(0%) blur(0); /* Removed contrast/brightness that caused tint */
 }
 
 /* Activate the masks as they reach the Nexus */
