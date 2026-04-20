@@ -83,13 +83,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const letterContent   = document.getElementById('letter-content');
     const typewriterEl    = document.getElementById('typewriter-text');
 
-    const letterText = `Priya, honestly speaking, nee friendship lekapothe nenu eeroju ila undevadini kadu. 
-Prati chinna vishayam lo, prati badha lo nuvvu naku thodu unnau. 
-Friendship ante just matladukovadam kadu, okariki okaru "safe place" ga undadam ani niku telusu. 
+    const letterText = `Priya, mana friendship more than 20+ years ayina kooda... 
+Manam antha ekkuva calls maatladaka poina, messages chesukoka poina, but it was always special. 
 
-"I don't just feel lucky; I feel like I've found my constant in this changing world. 
-You are my home, my peace, and my greatest fortune. 
-Forever is not enough to thank you for being my best friend."`;
+Eppudu nee paina aa respect, aa value, aa affection thaggadhu. 
+I always feel like you are the closest person from my family. 
+
+"Twenty years of friendship and our bond remains as pure as day one. 
+Even in our silence, there is a deep respect and affection that will never fade. 
+You aren't just a friend; you are the soul I call family."`;
 
     function typeWriter(text, element, speed = 55) {
         element.innerHTML = '';
