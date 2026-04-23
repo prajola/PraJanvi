@@ -84,18 +84,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const typewriterEl    = document.getElementById('typewriter-text');
 
     const letterText = `Priya, mana friendship more than 20+ years ayina kooda... 
-Manam antha ekkuva calls maatladaka poina, messages chesukoka poina, but it was always special. 
+Manam antha ekkuva calls maatladaka poina, messages chesukoka poina, it was always so special. 
 
-Eppudu nee paina aa respect, aa value, aa affection thaggadhu. 
+Eppudu nee paina unna aa respect, aa value, aa affection thaggadhu. 
 I always feel like you are the closest person from my family. 
+
+I often think about travelling the world with you... to visit beautiful places, just to feel that freshness and pureness together. 
+I want to turn every little second spent with you into a golden moment. 
+There are so many places on my bucket list, and I genuinely want to experience those beautiful memories with you by my side. 
+
+Emo teliyadhu... adhi naalo unna oka chinna korika alaaa. ✨
+
+Whatever your past was, and whatever your present is... I only pray to God to make our bond stronger and keep it this pure forever. 
 
 "You are so special to me, adhi ela express cheyalo kooda teliyadam ledhu... edho teliyani feel. 
 Mana madhya aa understanding kooda chaala pure gaa vuntundhi. 
-Nee manchi korevallalo top lo nene vuntanu. Because I respect you, and I like you so much."
-
-"Twenty years of friendship and our bond remains as pure as day one. 
-Even in our silence, there is a deep respect and affection that will never fade. 
-You aren't just a friend; you are the soul I call family."`;
+Nee manchi korevallalo top lo nene vuntanu. Because I respect you, and I like you so much."`;
 
     function typeWriter(text, element, speed = 55) {
         element.innerHTML = '';
