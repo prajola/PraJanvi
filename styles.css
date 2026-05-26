@@ -72,11 +72,6 @@ body, html {
     overflow: hidden;
     font-family: 'Poppins', sans-serif;
     background: var(--bg-pink);
-    cursor: none;
-}
-
-button, a, .dot, .portrait-container, .glass-btn {
-    cursor: none !important;
 }
 
 .hidden { display: none !important; }
