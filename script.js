@@ -83,23 +83,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const letterContent   = document.getElementById('letter-content');
     const typewriterEl    = document.getElementById('typewriter-text');
 
-    const letterText = `Priya, mana friendship more than 20+ years ayina kooda... 
-Manam antha ekkuva calls maatladaka poina, messages chesukoka poina, it was always so special. 
+    const letterText = `Priya, mana friendship more than 20+ years ayina kooda...
+Manam antha ekkuva calls maatladaka poina, messages chesukoka poina, it was always so special.
 
-Eppudu nee paina unna aa respect, aa value, aa affection thaggadhu. 
-I always feel like you are the closest person from my family. 
+Eppudu nee paina unna aa respect, aa value, aa affection thaggadhu.
+I always feel like you are the closest person from my family.
+Adhento, nijam gaa chepthunna... naaku ala anipisthadhi — endho teliyani bonding, that continues from our past birth and still carrying. ✨
 
-I often think about travelling the world with you... to visit beautiful places, just to feel that freshness and pureness together. 
-I want to turn every little second spent with you into a golden moment. 
-There are so many places on my bucket list, and I genuinely want to experience those beautiful memories with you by my side. 
+I often think about travelling the world with you... to visit beautiful places, just to feel that freshness and pureness together.
+I want to turn every little second spent with you into a golden moment.
+There are so many places on my bucket list, and I genuinely want to experience those beautiful memories with you by my side.
 
 Emo teliyadhu... adhi naalo unna oka chinna korika alaaa. ✨
 
-Whatever your past was, and whatever your present is... I only pray to God to make our bond stronger and keep it this pure forever. 
+Whatever your past was, and whatever your present is... I only pray to God to make our bond stronger and keep it this pure forever.
 
-"You are so special to me, adhi ela express cheyalo kooda teliyadam ledhu... edho teliyani feel. 
-Mana madhya aa understanding kooda chaala pure gaa vuntundhi. 
-Nee manchi korevallalo top lo nene vuntanu. Because I respect you, and I like you so much."`;
+"You are so special to me, adhi ela express cheyalo kooda teliyadam ledhu... edho teliyani feel.
+Mana madhya aa understanding kooda chaala pure gaa vuntundhi.
+Nee manchi korevallalo top lo nene vuntanu. Because I respect you, and I like you so much."
+
+FYI — chinnappudu nuvvu chaala cute gaa vunnaave... 🌻✨`;
 
     function typeWriter(text, element, speed = 55) {
         element.innerHTML = '';
@@ -149,15 +152,82 @@ Nee manchi korevallalo top lo nene vuntanu. Because I respect you, and I like yo
         }, 2500);
     }
 
-    // --- Manual Envelope Opening ---
+    // --- Surprise envelope opening — full multi-phase reveal ---
+    // Phase 1 (0ms): confetti hearts/petals burst, three rings of light
+    //                expand, soft beam shines from behind the envelope
+    // Phase 2 (~750ms): envelope flap rotates open
+    // Phase 3 (~2000ms): envelope wrapper fades out, letter card rises
+    //                    in with stagger on each section
     let isEnvelopeOpening = false;
+
+    // Emoji pool for the burst — mix of friendship-y warmth and
+    // celebration. Repeated so each spawn picks one randomly.
+    const CONFETTI_EMOJI = ['💛', '💗', '💖', '✨', '⭐', '🌸', '🌻', '🩷', '💫', '🤍'];
+
+    function spawnSurpriseEffects(host) {
+        // 1. Background light beam (single big element)
+        const beam = document.createElement('div');
+        beam.className = 'surprise-beam';
+        host.appendChild(beam);
+
+        // 2. Three concentric expanding rings
+        const rings = document.createElement('div');
+        rings.className = 'surprise-rings';
+        rings.innerHTML = '<span></span><span></span><span></span>';
+        host.appendChild(rings);
+
+        // 3. ~22 confetti pieces flying outward in a full circle.
+        //    Each one gets a random angle, distance, rotation, and a
+        //    short stagger so they don't all fire at once.
+        const count = 22;
+        for (let i = 0; i < count; i++) {
+            const el = document.createElement('span');
+            el.className = 'confetti';
+            el.textContent = CONFETTI_EMOJI[Math.floor(Math.random() * CONFETTI_EMOJI.length)];
+
+            // Distribute around 360°, with a little jitter so the
+            // pattern doesn't look mechanical.
+            const baseAngle = (i / count) * 360;
+            const jitter = (Math.random() - 0.5) * 18;
+            const angle = baseAngle + jitter;
+            const distance = 240 + Math.random() * 220; // 240–460 px
+            const spinStart = (Math.random() - 0.5) * 60;
+            const spinEnd = (Math.random() - 0.5) * 720;
+            const delay = Math.random() * 280;
+            const size = 1.2 + Math.random() * 0.9;
+
+            el.style.setProperty('--angle', angle + 'deg');
+            el.style.setProperty('--dist', distance + 'px');
+            el.style.setProperty('--spin', spinStart + 'deg');
+            el.style.setProperty('--rotate', spinEnd + 'deg');
+            el.style.setProperty('--delay', delay + 'ms');
+            el.style.fontSize = size + 'rem';
+            host.appendChild(el);
+        }
+
+        // Tidy up after the longest animation completes (~2s).
+        setTimeout(() => {
+            beam.remove();
+            rings.remove();
+            host.querySelectorAll('.confetti').forEach((c) => c.remove());
+        }, 2200);
+    }
+
     envelopeWrapper.addEventListener('click', () => {
         if (isEnvelopeOpening) return;
         isEnvelopeOpening = true;
-        
-        envelope.classList.add('open');
+
+        // Host the burst layers on the wrapper so they originate from
+        // the envelope's centre.
+        spawnSurpriseEffects(envelopeWrapper);
+        envelopeWrapper.classList.add('surprise');
         document.getElementById('focus-overlay')?.classList.add('active');
-        
+
+        // Slight delay before the flap opens so the burst lands first.
+        setTimeout(() => {
+            envelope.classList.add('open');
+        }, 350);
+
         // After envelope is open, reveal the letter
         setTimeout(() => {
             envelopeWrapper.style.opacity = '0';
@@ -165,18 +235,18 @@ Nee manchi korevallalo top lo nene vuntanu. Because I respect you, and I like yo
                 envelopeWrapper.style.display = 'none';
                 letterContent.classList.remove('hidden');
                 letterContent.classList.add('visible');
-                
+
                 // Start typing the heart-felt message
                 setTimeout(() => {
                     typeWriter(letterText, typewriterEl, 45);
-                    
+
                     // Unlock Journey Page once content is revealed
                     isJourneyUnlocked = true;
                     updateArrows();
                     updateDots();
                 }, 500);
             }, 500);
-        }, 2000); // Wait for envelope animation
+        }, 2200); // burst (~750ms) + flap open (~800ms) + breathing room
     });
 
     // --- Touch / drag ---
