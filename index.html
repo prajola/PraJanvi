@@ -48,11 +48,10 @@
     <div class="page-dots" id="page-dots">
         <span class="dot active" data-page="0"></span>
         <span class="dot" data-page="1"></span>
-        <span class="dot" data-page="2"></span>
     </div>
 
     <!-- Horizontal Slider -->
-    <div class="slider-track" id="slider-track" style="width: 300vw;">
+    <div class="slider-track" id="slider-track" style="width: 200vw;">
         <section class="page welcome-page" id="page-welcome">
             <!-- Animated background layers -->
             <div class="hero-bg-layer"></div>
@@ -81,9 +80,8 @@
                     </div>
 
                     <h1 class="hero-title">
-                        <span class="title-line" style="--delay: 0.1s">Your presence is special.</span>
-                        <span class="title-line" style="--delay: 0.3s">Your friendship —</span>
-                        <span class="title-line title-accent" style="--delay: 0.5s">even more so, Priya.</span>
+                        <span class="title-line" style="--delay: 0.1s">Some friendships</span>
+                        <span class="title-line title-accent" style="--delay: 0.3s">last a lifetime.</span>
                     </h1>
 
                     <div class="hero-divider">
@@ -93,18 +91,8 @@
                     </div>
 
                     <p class="hero-message">
-                        Priya, nee friendship is its own kind of gift —
-                        rare, real, and forever precious.
-                        Having a friend like you — every day feels brighter… the only sadness is we haven't shared enough time together. 🌻
+                        Happy Friendship Day, Priya. 🌻
                     </p>
-
-                    <button class="hero-btn" id="open-letter-btn">
-                        <span class="btn-glow"></span>
-                        <span class="btn-content">
-                            <span class="btn-icon">💌</span>
-                            <span>Open My Letter</span>
-                        </span>
-                    </button>
 
                     <div class="hero-signature">
                         — my favourite human, my best friend ✨
@@ -123,79 +111,22 @@
                         <div class="portrait-ring"></div>
                         <img src="assets/priya.jpg?v=2" alt="My Best Friend Priya" class="portrait-image">
                         <div class="portrait-glow"></div>
-                        <div class="portrait-label">Priya ✨</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PAGE 2: Letter -->
-        <section class="page letter-page" id="page-letter">
-            <div class="focus-overlay" id="focus-overlay"></div>
-            <div class="letter-reveal-container">
-                <div class="sparkle-container" id="sparkle-container"></div>
-                <!-- 3D Envelope -->
-                <div class="envelope-wrapper" id="envelope-wrapper">
-                    <div class="envelope" id="envelope">
-                        <div class="envelope-back"></div>
-                        <div class="envelope-flap" id="envelope-flap">
-                            <div class="heart-seal">❤️</div>
-                        </div>
-                        <div class="envelope-body"></div>
-                        <div class="envelope-paper-preview">✨</div>
-                    </div>
-                    <div class="envelope-click-hint" id="envelope-hint">Tap to Open 💌</div>
-                </div>
-
-                <!-- The Actual Letter (Hidden initially) -->
-                <div class="page-inner letter-inner hidden" id="letter-content">
-                    <div class="letter-decor-left">🌻</div>
-                    <div class="letter-decor-right">🌸</div>
-
-                    <div class="letter-card glass-parchment">
-                        <div class="letter-card-header">
-                            <span class="letter-emoji">💛</span>
-                            <h2 class="handwriting-font">A Letter to My Best Friend</h2>
-                            <div class="gold-divider"></div>
-                        </div>
-                        
-                        <div class="parchment-content" id="typewriter-text">
-                            <!-- Text will be typed here via JS -->
-                        </div>
-
-                        <!-- Polaroid Gallery -->
-                        <div class="memory-snapshots">
-                            <div class="snapshot-frame angle-left">
-                                <img src="assets/Priya Pic1.png" alt="Memory 1">
-                                <div class="snapshot-caption">Together ✨</div>
-                            </div>
-                            <div class="snapshot-frame angle-right">
-                                <img src="assets/Priya Memory 2.png" alt="Memory 2" style="object-position: center 20%;">
-                                <div class="snapshot-caption">Always 🌻</div>
-                            </div>
-                            <div class="snapshot-frame angle-straight">
-                                <img src="assets/Priya Memory 3.png" alt="Memory 3" style="object-position: center 10%;">
-                                <div class="snapshot-caption">Forever 🩷</div>
-                            </div>
-                        </div>
-
-                        <div class="blessing-card">
-                            <p class="blessing-text cursive">
-                                I value your presence in my life more than words can ever say.
-                            </p>
-                            <p class="blessing-sub">
-                                You make every ordinary day feel extraordinary. ✨
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-
-        <!-- PAGE 3: The Journey Together -->
         <section class="page journey-page" id="page-journey">
+            <!-- The three polaroids from the letter page, drifting behind the
+                 content as decoration. Decorative only, so aria-hidden. -->
+            <div class="journey-bg-frames" aria-hidden="true">
+                <div class="bg-frame bg-frame-2">
+                    <img src="assets/Priya Memory 2.png" alt="" style="object-position: center 20%;">
+                </div>
+                <div class="bg-frame bg-frame-3">
+                    <img src="assets/Priya Memory 3.png" alt="" style="object-position: center 10%;">
+                </div>
+            </div>
             <div class="page-inner journey-inner">
                 <div class="connection-blend-root">
                     <div class="connection-glow"></div>
@@ -218,7 +149,8 @@
                 <div class="journey-footer">
                     <h2 class="journey-title handwriting-font">20+ Years of Pure, Unbreakable Bond ✨</h2>
                     <p class="journey-subtitle">Always together, forever us. ✨</p>
-                    <p class="memory-caption" style="margin-top: 20px; font-size: 0.95rem; opacity: 0.85; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;">Happy Friendship Day, Priya! 💛✨ Nuvvu eppudu happy gaa vundali, nuvvu manchi gaa doctor ayyi chaala mandhi poor peoples ki help cheyali. Uncle and aunty ni happy gaa choosukovali. And neeku oka promise icchanu 8 years back... neeku gurthu vundho ledho, ento cheppu choodham?? But nenu marchipoledhu — we have to do it together. Neeku gurthu vundhaa aa promise ento??? I wish it would happen. Take care, and any situation, I will be there for you — just oka text chaalu. Best friends, forever. 🩷✨</p>
+                    <p class="memory-caption" style="margin-top: 20px; font-size: 0.95rem; opacity: 0.85; max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.6;">Happy Friendship Day, Priya! 💛✨ Nuvvu eppudu happy gaa vundali, nuvvu manchi gaa doctor ayyi chaala mandhi poor peoples ki help cheyali. Uncle and aunty ni happy gaa choosukovali. And neeku oka promise icchanu 8 years back... neeku gurthu vundho ledho. But nenu marchipoledhu — we have to do it together. Neeku gurthu vundhaa aa promise ento??? I wish it would happen. Take care, and any situation, I will be there for you — just oka text chaalu. Together we will build something great and be an inspiration to young talents. I'm super excited to working with you. Let's rock it 🔥</p>
+                    <p class="memory-caption memory-caption-note" style="margin-top: 18px; font-size: 0.95rem; opacity: 0.75; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.65;">Actually this is 3rd page. 2nd page lo chaala raasa, kaani koncham athi gaa vuntundhi ani remove chesa. Malli you will scold me 😅, mundhu jagrathaaa hahaha 😂😂</p>
                 </div>
             </div>
         </section>

@@ -527,7 +527,7 @@ body, html {
     line-height: 1.9;
     font-weight: 300;
     max-width: 450px;
-    margin-bottom: 35px;
+    margin-bottom: 10px;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards;
     animation-delay: 1s;
@@ -536,6 +536,66 @@ body, html {
 .hero-message strong {
     color: var(--text-dark);
     font-weight: 600;
+}
+
+/* Hero Highlight Message - Special Visible Message */
+.hero-highlight-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0 35px 0;
+    padding: 25px 35px;
+    background: linear-gradient(135deg,
+        rgba(255, 215, 186, 0.25) 0%,
+        rgba(252, 231, 243, 0.35) 50%,
+        rgba(255, 215, 186, 0.25) 100%);
+    border-radius: 20px;
+    border: 2px solid rgba(212, 163, 80, 0.4);
+    box-shadow:
+        0 8px 32px rgba(212, 163, 80, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    animation: glowPulse 2s ease-in-out infinite, fadeInUp 0.8s ease forwards;
+    animation-delay: 0s, 1.2s;
+    max-width: 500px;
+}
+
+.highlight-sparkle {
+    font-size: 1.5rem;
+    animation: sparkleRotate 3s linear infinite;
+}
+
+.highlight-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+    margin: 0;
+    text-shadow: 0 2px 8px rgba(212, 163, 80, 0.3);
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow:
+            0 8px 32px rgba(212, 163, 80, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow:
+            0 12px 48px rgba(212, 163, 80, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.7),
+            0 0 30px rgba(255, 215, 186, 0.3);
+    }
+}
+
+@keyframes sparkleRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* CTA Button */
@@ -1378,7 +1438,16 @@ html, body {
     }
     .hero-title { font-size: 2.5rem; }
     .hero-message { font-size: 1.1rem; }
-    
+
+    .hero-highlight-message {
+        padding: 20px 25px;
+        margin: 25px 0 30px 0;
+    }
+
+    .highlight-text {
+        font-size: 1.05rem;
+    }
+
     .letter-inner { 
         margin: 0 auto; 
         padding: 40px 10px 80px 10px; /* Add bottom padding so navigation doesn't block */
@@ -1476,6 +1545,71 @@ html, body {
    ============================================ */
 .journey-page {
     background: radial-gradient(circle at center, #fff1f5 0%, #fdf2f8 50%, #fce7f3 100%);
+}
+
+/* ── Floating polaroid frames behind the journey page ──────────────
+   Same three photos as the letter page, drifting slowly as background
+   decoration. Pointer-events off and low opacity so they never compete
+   with the content or block the nav arrows. */
+.journey-bg-frames {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-frame {
+    position: absolute;
+    background: #fff;
+    padding: 10px 10px 34px 10px;
+    box-shadow: 0 18px 40px rgba(190, 24, 93, 0.10), 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.03);
+    opacity: 0.32;
+    will-change: transform;
+}
+
+.bg-frame img {
+    display: block;
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    filter: saturate(0.9);
+}
+
+/* Each frame gets its own resting angle, position and drift timing so the
+   three never move in step. */
+.bg-frame-2 {
+    width: 150px;
+    bottom: 10%;
+    left: 7%;
+    --tilt: 6deg;
+    animation: bgFrameDrift 17s ease-in-out infinite -4s;
+}
+.bg-frame-3 {
+    width: 160px;
+    top: 14%;
+    right: 5%;
+    --tilt: 8deg;
+    animation: bgFrameDrift 15s ease-in-out infinite -8s;
+}
+
+@keyframes bgFrameDrift {
+    0%, 100% { transform: rotate(var(--tilt)) translateY(0); }
+    50%      { transform: rotate(var(--tilt)) translateY(-18px); }
+}
+
+/* Keep the page content above the drifting frames. */
+.journey-page .page-inner { position: relative; z-index: 1; }
+
+/* Narrow screens have no room for them beside the content. */
+@media (max-width: 900px) {
+    .journey-bg-frames { display: none; }
+}
+
+/* Respect a reduced-motion preference — the frames stay, the drift stops. */
+@media (prefers-reduced-motion: reduce) {
+    .bg-frame { animation: none; transform: rotate(var(--tilt)); }
 }
 
 .journey-inner {
